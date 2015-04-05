@@ -1,0 +1,14 @@
+ select f1.`Flight_number`,f2.`Flight_number`,f3.`Flight_number`,f4.`Flight_number`,f1.`departure_airport_code`,f2.`Departure_airport_code`,f2.`arrival_airport_code`,f3.`arrival_airport_code`,f4.`arrival_airport_code`,f1.`Weekdays`,f2.`Weekdays`,f3.`Weekdays`,
+ timediff(f2.`Scheduled_departure_time`,f1.`Scheduled_arrival_time`) from flight f1 join flight f2 on f1.`Arrival_airport_code`= f2.`Departure_airport_code`
+ join flight f3 on f2.`Arrival_airport_code`= f3.`Departure_airport_code`
+ join flight f4 on f3.`Arrival_airport_code`= f4.`Departure_airport_code` 
+ and f3.`Arrival_airport_code` = 'JFK' where f1.`Departure_airport_code` = 'LAS'  and f2.`Arrival_airport_code` != 'JFK' and f3.`Departure_airport_code` != 'JFK' and f4.`Arrival_airport_code` != 'JFK' and
+timediff(f2.`Scheduled_departure_time`,f1.`Scheduled_arrival_time`)>'01:00:00' and timediff(f3.`Scheduled_departure_time`,f2.`Scheduled_arrival_time`)>'01:00:00'
+ and timediff(f4.`Scheduled_departure_time`,f3.`Scheduled_arrival_time`)>'01:00:00' and 
+((f1.`Weekdays` LIKE '%Mon%' and f2.`Weekdays` LIKE '%Mon%' and f3.`Weekdays` LIKE '%Mon%' and f4.`Weekdays` LIKE '%Mon%') or 
+(f1.`Weekdays` LIKE '%Tue%' and f2.`Weekdays` LIKE '%Tue%' and f3.`Weekdays` LIKE '%Tue%' and f4.`Weekdays` LIKE '%Tue%') or 
+(f1.`Weekdays` LIKE '%Wed%' and f2.`Weekdays` LIKE '%Wed%' and f3.`Weekdays` LIKE '%Wed%' and f4.`Weekdays` LIKE '%Wed%') or 
+(f1.`Weekdays` LIKE '%Thu%' and f2.`Weekdays` LIKE '%Thu%' and f3.`Weekdays` LIKE '%Thu%' and f4.`Weekdays` LIKE '%Thu%') or 
+(f1.`Weekdays` LIKE '%Fri%' and f2.`Weekdays` LIKE '%Fri%' and f3.`Weekdays` LIKE '%Fri%' and f4.`Weekdays` LIKE '%Fri%') or 
+(f1.`Weekdays` LIKE '%Sat%' and f2.`Weekdays` LIKE '%Sat%' and f3.`Weekdays` LIKE '%Sat%' and f4.`Weekdays` LIKE '%Sat%') or 
+(f1.`Weekdays` LIKE '%Sun%' and f2.`Weekdays` LIKE '%Sun%' and f3.`Weekdays` LIKE '%Sun%' and f4.`Weekdays` LIKE '%Sun%'))

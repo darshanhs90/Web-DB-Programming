@@ -1,0 +1,4 @@
+LOAD DATA LOCAL INFILE 'C:\\Users\\darshan\\Desktop\\MS\\Text Books\\Database Design\\Project\\Project 1\\AIRPORT.csv'
+INTO TABLE AIRPORT
+COLUMNS TERMINATED BY ','
+LINES TERMINATED BY '\n';
